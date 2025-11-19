@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeREN Travel & Tour — Jasa Travel Sumatera Terpercaya</title>
+    <meta name="description" content="KeREN Travel & Tour menawarkan layanan travel dan tour premium di Sumatera dengan armada nyaman, driver berpengalaman, dan harga terjangkau. Pesan tiket sekarang!">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-900">
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20bertanya%20tentang%20layanan%20travel" 
+       target="_blank" 
+       class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <img src="./assets/logo.png" alt="KeREN Travel Logo" class="w-10 h-10 object-contain">
+                    <span class="text-white font-bold text-xl">KeREN Travel</span>
+                </div>
+                <ul class="hidden md:flex space-x-8 text-white text-sm font-medium">
+                    <li><a href="#hero" class="hover:text-yellow-400 transition">Beranda</a></li>
+                    <li><a href="#services" class="hover:text-yellow-400 transition">Layanan</a></li>
+                    <li><a href="#routes" class="hover:text-yellow-400 transition">Rute</a></li>
+                    <li><a href="#price" class="hover:text-yellow-400 transition">Harga</a></li>
+                    <li><a href="#testimonials" class="hover:text-yellow-400 transition">Testimoni</a></li>
+                    <li><a href="#faq" class="hover:text-yellow-400 transition">FAQ</a></li>
+                </ul>
+                <button onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})" 
+                        class="hidden md:block bg-yellow-400 text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition">
+                    Pesan Sekarang
+                </button>
+                <button id="menu-toggle" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="md:hidden text-white pb-4">
+                <a href="#hero" class="block py-2 hover:text-yellow-400">Beranda</a>
+                <a href="#services" class="block py-2 hover:text-yellow-400">Layanan</a>
+                <a href="#routes" class="block py-2 hover:text-yellow-400">Rute</a>
+                <a href="#price" class="block py-2 hover:text-yellow-400">Harga</a>
+                <a href="#testimonials" class="block py-2 hover:text-yellow-400">Testimoni</a>
+                <a href="#faq" class="block py-2 hover:text-yellow-400">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Sparkles -->
+        <div class="sparkle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="sparkle" style="top: 40%; left: 80%; animation-delay: 0.5s;"></div>
+        <div class="sparkle" style="top: 60%; left: 20%; animation-delay: 1s;"></div>
+        <div class="sparkle" style="top: 80%; left: 70%; animation-delay: 1.5s;"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto pt-20">
+            <div class="float mb-8">
+                <span class="inline-block bg-yellow-400/20 text-yellow-400 px-4 py-2 rounded-full text-sm font-semibold border border-yellow-400/30">
+                    ✨ Travel Premium Sumatera
+                </span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                Perjalanan Anda,<br/>
+                <span class="gradient-text">Kenyamanan Kami</span>
+            </h1>
+            
+            <p class="text-gray-300 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+                Nikmati pengalaman perjalanan yang aman, nyaman, dan elegan dengan KeREN Travel & Tour. 
+                Melayani rute Medan - Padang - Riau dengan armada terbaik.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <button onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})" 
+                        class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 transform hover:scale-105 transition shadow-lg">
+                    🎫 Pesan Tiket Sekarang
+                </button>
+                <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20bertanya" 
+                   target="_blank"
+                   class="glass text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/20 transition">
+                    💬 Chat WhatsApp
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <div class="glass p-4 rounded-xl text-white">
+                    <div class="text-3xl font-bold text-yellow-400">24/7</div>
+                    <div class="text-sm">Layanan</div>
+                </div>
+                <div class="glass p-4 rounded-xl text-white">
+                    <div class="text-3xl font-bold text-yellow-400">10+</div>
+                    <div class="text-sm">Rute</div>
+                </div>
+                <div class="glass p-4 rounded-xl text-white">
+                    <div class="text-3xl font-bold text-yellow-400">100%</div>
+                    <div class="text-sm">Aman</div>
+                </div>
+                <div class="glass p-4 rounded-xl text-white">
+                    <div class="text-3xl font-bold text-yellow-400">5★</div>
+                    <div class="text-sm">Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-500 font-semibold">LAYANAN KAMI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Apa yang Kami Tawarkan?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Berbagai pilihan layanan untuk memenuhi kebutuhan perjalanan Anda</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border-2 border-blue-200 fade-in">
+                    <div class="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
+                        🚐
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">Travel Antar Kota</h3>
+                    <p class="text-gray-600 mb-4">Layanan travel nyaman dari kota ke kota dengan armada premium dan AC dingin</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> AC & WiFi</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Kursi Empuk</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Driver Profesional</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl border-2 border-yellow-200 fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
+                        🏠
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">Door to Door</h3>
+                    <p class="text-gray-600 mb-4">Jemput dari rumah Anda dan antar sampai tujuan tanpa ribet</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Jemput di Lokasi</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Antar ke Alamat</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Tanpa Transit</li>
+                    </ul>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl border-2 border-purple-200 fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mb-6 text-3xl">
+                        📦
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-gray-900">Kirim Paket</h3>
+                    <p class="text-gray-600 mb-4">Pengiriman paket dan dokumen cepat, aman, dan terpercaya</p>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Pengiriman Cepat</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Harga Kompetitif</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Aman Terjamin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Routes Section -->
+    <section id="routes" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-400 font-semibold">RUTE PERJALANAN</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4">Jangkauan Layanan Kami</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Melayani berbagai rute strategis di Sumatera</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="glass p-8 rounded-2xl fade-in">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-2xl mr-4">🗺️</div>
+                        <h3 class="text-2xl font-bold">Rute Sumatera Barat</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <div class="font-semibold">Medan → Padang Sidempuan</div>
+                                <div class="text-sm text-gray-400">±5-6 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <div class="font-semibold">Padang Sidempuan → Kotanopan</div>
+                                <div class="text-sm text-gray-400">±2-3 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">3</div>
+                            <div>
+                                <div class="font-semibold">Kotanopan → Pasaman</div>
+                                <div class="text-sm text-gray-400">±3-4 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">4</div>
+                            <div>
+                                <div class="font-semibold">Pasaman → Bukittinggi</div>
+                                <div class="text-sm text-gray-400">±2-3 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">5</div>
+                            <div>
+                                <div class="font-semibold">Bukittinggi → Padang</div>
+                                <div class="text-sm text-gray-400">±2 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">6</div>
+                            <div>
+                                <div class="font-semibold">Padang → Payakumbuh</div>
+                                <div class="text-sm text-gray-400">±2 jam perjalanan</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="glass p-8 rounded-2xl fade-in" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center text-2xl mr-4">🌊</div>
+                        <h3 class="text-2xl font-bold">Rute Riau</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">1</div>
+                            <div>
+                                <div class="font-semibold">Medan → Tanjung Balai</div>
+                                <div class="text-sm text-gray-400">±3-4 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">2</div>
+                            <div>
+                                <div class="font-semibold">Tanjung Balai → Bagan Batu</div>
+                                <div class="text-sm text-gray-400">±2-3 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">3</div>
+                            <div>
+                                <div class="font-semibold">Bagan Batu → Bagan Siapi-api</div>
+                                <div class="text-sm text-gray-400">±1-2 jam perjalanan</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center text-sm font-bold mr-4 flex-shrink-0">4</div>
+                            <div>
+                                <div class="font-semibold">Bagan Siapi-api → Riau</div>
+                                <div class="text-sm text-gray-400">±2-3 jam perjalanan</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-4 bg-yellow-400/10 rounded-xl border border-yellow-400/30">
+                        <div class="flex items-center text-yellow-400">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="text-sm font-semibold">Ada rute khusus? Hubungi kami!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Section -->
+    <section id="price" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-500 font-semibold">HARGA TERJANGKAU</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Paket Perjalanan</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="price-card border-2 border-gray-200 rounded-2xl p-8 hover:border-yellow-400 transition fade-in">
+                    <div class="text-center mb-6">
+                        <div class="text-yellow-500 font-semibold mb-2">REGULER</div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">Hubungi</div>
+                        <div class="text-gray-600">Harga terbaik</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Travel Standar
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            AC & Musik
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Driver Berpengalaman
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Asuransi Perjalanan
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20tanya%20harga%20paket%20Reguler" 
+                       target="_blank"
+                       class="block w-full bg-gray-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-gray-800 transition">
+                        Tanya Harga
+                    </a>
+                </div>
+                
+                <div class="price-card border-2 border-yellow-400 rounded-2xl p-8 relative overflow-hidden fade-in" style="animation-delay: 0.2s;">
+                    <div class="absolute top-0 right-0 bg-yellow-400 text-gray-900 px-4 py-1 text-sm font-bold rounded-bl-xl">
+                        POPULER
+                    </div>
+                    <div class="text-center mb-6">
+                        <div class="text-yellow-500 font-semibold mb-2">DOOR TO DOOR</div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">Hubungi</div>
+                        <div class="text-gray-600">Paling diminati</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Semua fitur Reguler
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Jemput di Rumah
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Antar ke Alamat
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Tanpa Transit
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Fleksibel Waktu
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20tanya%20harga%20paket%20Door%20to%20Door" 
+                       target="_blank"
+                       class="block w-full bg-yellow-400 text-gray-900 text-center py-3 rounded-xl font-semibold hover:bg-yellow-500 transition">
+                        Tanya Harga
+                    </a>
+                </div>
+                
+                <div class="price-card border-2 border-gray-200 rounded-2xl p-8 hover:border-yellow-400 transition fade-in" style="animation-delay: 0.4s;">
+                    <div class="text-center mb-6">
+                        <div class="text-yellow-500 font-semibold mb-2">CHARTER</div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2">Hubungi</div>
+                        <div class="text-gray-600">Untuk rombongan</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Semua fitur Door to Door
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Mobil Pribadi
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Rute Custom
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Untuk Rombongan
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                            Harga Spesial
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20tanya%20harga%20paket%20Charter" 
+                       target="_blank"
+                       class="block w-full bg-gray-900 text-white text-center py-3 rounded-xl font-semibold hover:bg-gray-800 transition">
+                        Tanya Harga
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-gradient-to-br from-yellow-50 to-orange-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 fade-in">
+                <span class="text-yellow-600 font-semibold">RESERVASI MUDAH</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Pesan Tiket Sekarang</h2>
+                <p class="text-gray-600">Isi form di bawah ini atau langsung chat WhatsApp untuk pemesanan cepat</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-2xl p-8 md:p-12 fade-in">
+                <form id="booking-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label>
+                            <input type="text" id="nama" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                   placeholder="Masukkan nama Anda">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Nomor WhatsApp *</label>
+                            <input type="tel" id="whatsapp" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                   placeholder="08xx xxxx xxxx">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Lokasi Jemput *</label>
+                            <input type="text" id="jemput" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                   placeholder="Dari mana?">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tujuan *</label>
+                            <input type="text" id="tujuan" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                   placeholder="Ke mana?">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Keberangkatan *</label>
+                            <input type="date" id="tanggal" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Jumlah Penumpang *</label>
+                            <input type="number" id="penumpang" min="1" required
+                                   class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                   placeholder="Berapa orang?">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Catatan Tambahan</label>
+                        <textarea id="catatan" rows="4"
+                                  class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-yellow-400 focus:outline-none transition"
+                                  placeholder="Ada permintaan khusus? Tulis di sini..."></textarea>
+                    </div>
+                    
+                    <button type="submit" 
+                            class="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 py-4 rounded-xl font-bold text-lg hover:from-yellow-500 hover:to-yellow-600 transform hover:scale-105 transition shadow-lg">
+                        📱 Kirim via WhatsApp
+                    </button>
+                    
+                    <p class="text-center text-sm text-gray-500">
+                        Dengan menekan tombol di atas, Anda akan diarahkan ke WhatsApp untuk konfirmasi booking
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-500 font-semibold">TESTIMONI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Apa Kata Mereka?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Kepuasan pelanggan adalah prioritas kami</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl shadow-lg fade-in">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">B</div>
+                        <div>
+                            <div class="font-bold text-gray-900">Budi Santoso</div>
+                            <div class="text-sm text-gray-600">Pengusaha</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-700 italic">"Pelayanan sangat memuaskan! Driver ramah dan tepat waktu. Perjalanan Medan-Padang jadi nyaman banget. Highly recommended!"</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl shadow-lg fade-in" style="animation-delay: 0.2s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">S</div>
+                        <div>
+                            <div class="font-bold text-gray-900">Siti Aminah</div>
+                            <div class="text-sm text-gray-600">Ibu Rumah Tangga</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-700 italic">"Door to door service-nya mantap! Dijemput dari rumah sampai diantar ke alamat. Ga ribet sama sekali. Terima kasih KeREN Travel!"</p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl shadow-lg fade-in" style="animation-delay: 0.4s;">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
+                        <div>
+                            <div class="font-bold text-gray-900">Ahmad Rizki</div>
+                            <div class="text-sm text-gray-600">Mahasiswa</div>
+                        </div>
+                    </div>
+                    <div class="text-yellow-400 mb-3">⭐⭐⭐⭐⭐</div>
+                    <p class="text-gray-700 italic">"Harga terjangkau untuk mahasiswa. Armada bersih dan nyaman. Paket kirim dokumen juga cepat sampai. Top deh!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-500 font-semibold">PERTANYAAN</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">FAQ - Pertanyaan Umum</h2>
+                <p class="text-gray-600">Temukan jawaban untuk pertanyaan yang sering ditanyakan</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-gray-900 hover:bg-gray-50 transition flex justify-between items-center">
+                        <span>Bagaimana cara memesan tiket?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-4 text-gray-600 border-t">
+                            Anda bisa memesan tiket melalui form booking di website ini, atau langsung chat WhatsApp kami di 082372404544. Tim kami akan segera merespons.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in" style="animation-delay: 0.1s;">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-gray-900 hover:bg-gray-50 transition flex justify-between items-center">
+                        <span>Apakah ada layanan door to door?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-4 text-gray-600 border-t">
+                            Ya, kami menyediakan layanan door to door. Kami akan menjemput Anda di alamat dan mengantar sampai ke tujuan tanpa transit.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in" style="animation-delay: 0.2s;">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-gray-900 hover:bg-gray-50 transition flex justify-between items-center">
+                        <span>Berapa lama waktu perjalanan?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-4 text-gray-600 border-t">
+                            Waktu perjalanan bervariasi tergantung rute. Misalnya Medan-Padang sekitar 12-14 jam, Medan-Bukittinggi 10-12 jam. Kami selalu berusaha tepat waktu.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in" style="animation-delay: 0.3s;">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-gray-900 hover:bg-gray-50 transition flex justify-between items-center">
+                        <span>Apakah bisa kirim paket tanpa penumpang?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-4 text-gray-600 border-t">
+                            Ya, kami melayani pengiriman paket dan dokumen. Hubungi kami untuk informasi harga dan estimasi waktu pengiriman.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden fade-in" style="animation-delay: 0.4s;">
+                    <button class="faq-btn w-full px-6 py-5 text-left font-semibold text-gray-900 hover:bg-gray-50 transition flex justify-between items-center">
+                        <span>Bagaimana sistem pembayaran?</span>
+                        <svg class="w-5 h-5 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300">
+                        <div class="px-6 py-4 text-gray-600 border-t">
+                            Pembayaran bisa dilakukan via transfer bank atau cash. Untuk booking, biasanya perlu DP. Detail akan dijelaskan saat konfirmasi.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section id="why" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <span class="text-yellow-400 font-semibold">KEUNGGULAN</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4">Kenapa Pilih KeREN Travel?</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Kami berkomitmen memberikan pengalaman perjalanan terbaik</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center fade-in">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        🚌
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Armada Premium</h3>
+                    <p class="text-gray-400">Mobil terawat, bersih, dan dilengkapi AC untuk kenyamanan perjalanan</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        👨‍✈️
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Driver Profesional</h3>
+                    <p class="text-gray-400">Driver berpengalaman, ramah, dan menguasai rute dengan baik</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        ⏰
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tepat Waktu</h3>
+                    <p class="text-gray-400">Kami menghargai waktu Anda dengan keberangkatan yang on time</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        💰
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Harga Terjangkau</h3>
+                    <p class="text-gray-400">Harga kompetitif dengan kualitas layanan terbaik</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.4s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        🔒
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Keamanan Terjamin</h3>
+                    <p class="text-gray-400">Keselamatan penumpang adalah prioritas utama kami</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.5s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        📱
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Booking Mudah</h3>
+                    <p class="text-gray-400">Pemesanan cepat via WhatsApp atau form online</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.6s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        🎯
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Pelayanan Terbaik</h3>
+                    <p class="text-gray-400">Customer service responsif siap membantu Anda 24/7</p>
+                </div>
+                
+                <div class="text-center fade-in" style="animation-delay: 0.7s;">
+                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl">
+                        ⭐
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Terpercaya</h3>
+                    <p class="text-gray-400">Dipercaya ribuan pelanggan di seluruh Sumatera</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-yellow-400 to-yellow-500">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Siap Memulai Perjalanan?</h2>
+            <p class="text-gray-800 text-lg mb-8">Hubungi kami sekarang dan dapatkan penawaran terbaik untuk perjalanan Anda!</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20pesan%20tiket" 
+                   target="_blank"
+                   class="bg-gray-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transform hover:scale-105 transition inline-flex items-center justify-center">
+                    <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Chat WhatsApp
+                </a>
+                <button onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})"
+                        class="border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-900 hover:text-white transition">
+                    Isi Form Booking
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-gray-900 text-xl">K</div>
+                        <span class="text-white font-bold text-xl">KeREN Travel</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Travel dengan kenyamanan, keamanan, dan gaya bersama KeREN Travel & Tour.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#services" class="hover:text-yellow-400 transition">Travel Antar Kota</a></li>
+                        <li><a href="#services" class="hover:text-yellow-400 transition">Door to Door</a></li>
+                        <li><a href="#services" class="hover:text-yellow-400 transition">Kirim Paket</a></li>
+                        <li><a href="#price" class="hover:text-yellow-400 transition">Charter</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Link Cepat</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#routes" class="hover:text-yellow-400 transition">Rute Perjalanan</a></li>
+                        <li><a href="#price" class="hover:text-yellow-400 transition">Harga</a></li>
+                        <li><a href="#testimonials" class="hover:text-yellow-400 transition">Testimoni</a></li>
+                        <li><a href="#faq" class="hover:text-yellow-400 transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li class="flex items-start">
+                            <span class="mr-2">📱</span>
+                            <a href="https://wa.me/6282372404544" target="_blank" class="hover:text-yellow-400 transition">0823-7240-4544</a>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">⏰</span>
+                            <span>Buka 24/7</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="mr-2">📍</span>
+                            <span>Melayani Sumatera</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2024 KeREN Travel & Tour. All rights reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-yellow-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <a href="https://wa.me/6282372404544" target="_blank" class="text-gray-400 hover:text-yellow-400 transition">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./js/main.js"></script>
+</body>
+</html>
