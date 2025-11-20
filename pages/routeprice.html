@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rute & Harga - KeREN Travel & Tour</title>
+    <meta name="description" content="Cek rute perjalanan dan harga tiket travel KeREN Travel untuk berbagai destinasi di Sumatera">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-routes {
+            background: linear-gradient(rgba(10, 26, 68, 0.85), rgba(10, 26, 68, 0.9)), 
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        #mobile-menu.show {
+            max-height: 500px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #F6D372 0%, #D9A441 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .route-card {
+            transition: all 0.4s ease;
+        }
+        
+        .route-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(246, 211, 114, 0.3);
+        }
+        
+        .tab-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #F6D372 0%, #D9A441 100%);
+            color: white;
+        }
+        
+        .route-badge {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20booking" 
+       target="_blank" 
+       class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-white text-xl">K</div>
+                    <span class="text-white font-bold text-xl">KeREN Travel</span>
+                </div>
+                <ul class="hidden md:flex space-x-8 text-white text-sm font-medium">
+                    <li><a href="../index.html" class="hover:text-yellow-400 transition">Beranda</a></li>
+                    <li><a href="./services.html" class="hover:text-yellow-400 transition">Layanan</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 transition">Rute & Harga</a></li>
+                    <li><a href="./contact.html" class="hover:text-yellow-400 transition">Kontak</a></li>
+                    <li><a href="./about.html" class="hover:text-yellow-400 transition">Tentang Kami</a></li>
+                    <li><a href="./artikel.html" class="hover:text-yellow-400 transition">Artikel</a></li>
+                </ul>
+                <a href="https://wa.me/6282372404544" target="_blank" 
+                   class="hidden md:block bg-yellow-400 text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition">
+                    Pesan Sekarang
+                </a>
+                <button id="menu-toggle" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="md:hidden text-white pb-4">
+                <a href="../index.html" class="block py-2 hover:text-yellow-400">Beranda</a>
+                <a href="./services.html" class="block py-2 hover:text-yellow-400">Layanan</a>
+                <a href="#" class="block py-2 hover:text-yellow-400">Rute & Harga</a>
+                <a href="./contact.html" class="block py-2 hover:text-yellow-400">Kontak</a>
+                <a href="./about.html" class="block py-2 hover:text-yellow-400">Tentang Kami</a>
+                <a href="./artikel.html" class="block py-2 hover:text-yellow-400">Artikel</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-routes min-h-[60vh] flex items-center justify-center relative">
+        <div class="text-center text-white px-4 pt-20">
+            <div class="flex justify-center items-center gap-2 mb-6 text-gray-300">
+                <a href="../index.html" class="hover:text-yellow-400 transition">Home</a>
+                <span>›</span>
+                <span class="text-yellow-400">Rute & Harga</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Rute & <span class="gradient-text">Harga</span></h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Temukan rute perjalanan Anda dengan harga terbaik dan layanan terpercaya</p>
+        </div>
+    </section>
+
+    <!-- Quick Info -->
+    <section class="py-12 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-4xl mb-2">🚗</div>
+                    <div class="font-bold text-gray-900">10+</div>
+                    <div class="text-sm text-gray-600">Rute Tersedia</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">⏰</div>
+                    <div class="font-bold text-gray-900">24/7</div>
+                    <div class="text-sm text-gray-600">Layanan</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">💺</div>
+                    <div class="font-bold text-gray-900">Nyaman</div>
+                    <div class="text-sm text-gray-600">Armada Terbaru</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl mb-2">💰</div>
+                    <div class="font-bold text-gray-900">Terjangkau</div>
+                    <div class="text-sm text-gray-600">Harga Bersaing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs -->
+    <section class="py-8 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="tab-btn active px-8 py-3 rounded-full border-2 border-yellow-400 font-semibold" data-tab="sumatera-barat">
+                    🏔️ Rute Sumatera Barat
+                </button>
+                <button class="tab-btn px-8 py-3 rounded-full border-2 border-gray-300 font-semibold hover:border-yellow-400" data-tab="riau">
+                    🌴 Rute Riau
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Routes: Sumatera Barat -->
+    <section id="sumatera-barat" class="tab-content py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-yellow-500 font-semibold text-sm">RUTE POPULER</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Medan ↔ Sumatera Barat</h2>
+                <p class="text-gray-600 text-lg">Perjalanan nyaman menuju destinasi impian Anda</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Route 1: Padang Sidempuan -->
+                <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                    <div class="bg-gradient-to-br from-blue-500 to-blue-600 p-6 text-white relative">
+                        <div class="absolute top-4 right-4 route-badge">
+                            <span class="bg-white text-blue-600 px-3 py-1 rounded-full text-xs font-bold">POPULER</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">🏙️</div>
+                            <div>
+                                <div class="text-sm opacity-90">Dari Medan</div>
+                                <h3 class="text-2xl font-bold">Padang Sidempuan</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>±5-6 jam perjalanan</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Destinasi Wisata</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Mobil Terawat</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>24/7 Support</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-4 mb-4">
+                            <div class="flex items-end justify-between mb-3">
+                                <div>
+                                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                                </div>
+                                <div class="text-xs text-gray-500">/orang</div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Bukittinggi" 
+                           target="_blank"
+                           class="block w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl font-bold text-center hover:from-orange-600 hover:to-orange-700 transition">
+                            💬 Tanya Harga & Booking
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Route 2: Kotanopan -->
+<div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+    <div class="bg-gradient-to-br from-purple-500 to-purple-600 p-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">⛰️</div>
+            <div>
+                <div class="text-sm opacity-90">Dari Medan</div>
+                <h3 class="text-2xl font-bold">Kotanopan</h3>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Hubungi untuk info</span>
+        </div>
+    </div>
+    <div class="p-6">
+        <div class="space-y-3 mb-6">
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Armada Nyaman</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Jadwal Fleksibel</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Asuransi Perjalanan</span>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 pt-4 mb-4">
+            <div class="flex items-end justify-between mb-3">
+                <div>
+                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                </div>
+                <div class="text-xs text-gray-500">/orang</div>
+            </div>
+        </div>
+        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Kotanopan" 
+           target="_blank"
+           class="block w-full bg-gradient-to-r from-purple-500 to-purple-600 text-white py-3 rounded-xl font-bold text-center hover:from-purple-600 hover:to-purple-700 transition">
+            💬 Tanya Harga & Booking
+        </a>
+    </div>
+</div>
+
+<!-- Route 3: Pasaman -->
+<div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+    <div class="bg-gradient-to-br from-green-500 to-green-600 p-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🌾</div>
+            <div>
+                <div class="text-sm opacity-90">Dari Medan</div>
+                <h3 class="text-2xl font-bold">Pasaman</h3>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Hubungi untuk info</span>
+        </div>
+    </div>
+    <div class="p-6">
+        <div class="space-y-3 mb-6">
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Perjalanan Aman</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Harga Terjangkau</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Pelayanan Prima</span>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 pt-4 mb-4">
+            <div class="flex items-end justify-between mb-3">
+                <div>
+                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                </div>
+                <div class="text-xs text-gray-500">/orang</div>
+            </div>
+        </div>
+        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Pasaman" 
+           target="_blank"
+           class="block w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-3 rounded-xl font-bold text-center hover:from-green-600 hover:to-green-700 transition">
+            💬 Tanya Harga & Booking
+        </a>
+    </div>
+</div>
+
+<!-- Route 4: Bukittinggi -->
+<div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+    <div class="bg-gradient-to-br from-orange-500 to-orange-600 p-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="text-4xl">🏔️</div>
+            <div>
+                <div class="text-sm opacity-90">Dari Medan</div>
+                <h3 class="text-2xl font-bold">Bukittinggi</h3>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>Hubungi untuk info</span>
+        </div>
+    </div>
+    <div class="p-6">
+        <div class="space-y-3 mb-6">
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Destinasi Wisata</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Udara Sejuk</span>
+            </div>
+            <div class="flex items-center gap-3 text-gray-600">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Layanan Terbaik</span>
+            </div>
+        </div>
+        <div class="border-t border-gray-200 pt-4 mb-4">
+            <div class="flex items-end justify-between mb-3">
+                <div>
+                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                </div>
+                <div class="text-xs text-gray-500">/orang</div>
+            </div>
+        </div>
+        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Bukittinggi" 
+           target="_blank"
+           class="block w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl font-bold text-center hover:from-orange-600 hover:to-orange-700 transition">
+            💬 Tanya Harga & Booking
+        </a>
+    </div>
+</div>
+                <!-- Route 5: Padang -->
+                <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                    <div class="bg-gradient-to-br from-red-500 to-red-600 p-6 text-white relative">
+                        <div class="absolute top-4 right-4 route-badge">
+                            <span class="bg-white text-red-600 px-3 py-1 rounded-full text-xs font-bold">FAVORIT</span>
+                        </div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">🏖️</div>
+                            <div>
+                                <div class="text-sm opacity-90">Dari Medan</div>
+                                <h3 class="text-2xl font-bold">Padang</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Hubungi untuk info</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Rute Favorit</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Fasilitas Lengkap</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Driver Profesional</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-4 mb-4">
+                            <div class="flex items-end justify-between mb-3">
+                                <div>
+                                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                                </div>
+                                <div class="text-xs text-gray-500">/orang</div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Padang" 
+                           target="_blank"
+                           class="block w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-3 rounded-xl font-bold text-center hover:from-red-600 hover:to-red-700 transition">
+                            💬 Tanya Harga & Booking
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Route 6: Payakumbuh -->
+                <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                    <div class="bg-gradient-to-br from-teal-500 to-teal-600 p-6 text-white">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="text-4xl">🌄</div>
+                            <div>
+                                <div class="text-sm opacity-90">Dari Medan</div>
+                                <h3 class="text-2xl font-bold">Payakumbuh</h3>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Hubungi untuk info</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-3 mb-6">
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Perjalanan Nyaman</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Tepat Waktu</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-600">
+                                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <span>Aman & Terpercaya</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-4 mb-4">
+                            <div class="flex items-end justify-between mb-3">
+                                <div>
+                                    <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                    <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                                </div>
+                                <div class="text-xs text-gray-500">/orang</div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Payakumbuh" 
+                           target="_blank"
+                           class="block w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white py-3 rounded-xl font-bold text-center hover:from-teal-600 hover:to-teal-700 transition">
+                            💬 Tanya Harga & Booking
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<!-- Routes: Riau -->
+<section id="riau" class="tab-content py-20 bg-gradient-to-br from-gray-50 to-gray-100 hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-yellow-500 font-semibold text-sm">RUTE TERSEDIA</span>
+            <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Medan ↔ Riau</h2>
+            <p class="text-gray-600 text-lg">Jelajahi Riau dengan kenyamanan maksimal</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Route 1: Tanjung Balai -->
+            <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                <div class="bg-gradient-to-br from-cyan-500 to-cyan-600 p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-4xl">🌊</div>
+                        <div>
+                            <div class="text-sm opacity-90">Dari Medan</div>
+                            <h3 class="text-2xl font-bold">Tanjung Balai</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Hubungi untuk info</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Door to Door</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>AC & Musik</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Pelayanan Ramah</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mb-4">
+                        <div class="flex items-end justify-between mb-3">
+                            <div>
+                                <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                            </div>
+                            <div class="text-xs text-gray-500">/orang</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Tanjung%20Balai" 
+                       target="_blank"
+                       class="block w-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white py-3 rounded-xl font-bold text-center hover:from-cyan-600 hover:to-cyan-700 transition">
+                        💬 Tanya Harga & Booking
+                    </a>
+                </div>
+            </div>
+
+            <!-- Route 2: Bagan Batu -->
+            <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-4xl">🏘️</div>
+                        <div>
+                            <div class="text-sm opacity-90">Dari Medan</div>
+                            <h3 class="text-2xl font-bold">Bagan Batu</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Hubungi untuk info</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Jadwal Fleksibel</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Mobil Nyaman</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Harga Bersaing</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mb-4">
+                        <div class="flex items-end justify-between mb-3">
+                            <div>
+                                <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                            </div>
+                            <div class="text-xs text-gray-500">/orang</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Bagan%20Batu" 
+                       target="_blank"
+                       class="block w-full bg-gradient-to-r from-indigo-500 to-indigo-600 text-white py-3 rounded-xl font-bold text-center hover:from-indigo-600 hover:to-indigo-700 transition">
+                        💬 Tanya Harga & Booking
+                    </a>
+                </div>
+            </div>
+
+            <!-- Route 3: Bagan Siapi-api -->
+            <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                <div class="bg-gradient-to-br from-pink-500 to-pink-600 p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-4xl">🎣</div>
+                        <div>
+                            <div class="text-sm opacity-90">Dari Medan</div>
+                            <h3 class="text-2xl font-bold">Bagan Siapi-api</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Hubungi untuk info</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Destinasi Pantai</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Perjalanan Aman</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Driver Berpengalaman</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mb-4">
+                        <div class="flex items-end justify-between mb-3">
+                            <div>
+                                <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                            </div>
+                            <div class="text-xs text-gray-500">/orang</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Bagan%20Siapi-api" 
+                       target="_blank"
+                       class="block w-full bg-gradient-to-r from-pink-500 to-pink-600 text-white py-3 rounded-xl font-bold text-center hover:from-pink-600 hover:to-pink-700 transition">
+                        💬 Tanya Harga & Booking
+                    </a>
+                </div>
+            </div>
+
+            <!-- Route 4: Riau (Umum) -->
+            <div class="route-card bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-gray-100">
+                <div class="bg-gradient-to-br from-yellow-500 to-yellow-600 p-6 text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="text-4xl">🌴</div>
+                        <div>
+                            <div class="text-sm opacity-90">Dari Medan</div>
+                            <h3 class="text-2xl font-bold">Riau</h3>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>Hubungi untuk info</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Berbagai Destinasi</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Armada Nyaman</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-gray-600">
+                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span>Harga Terbaik</span>
+                        </div>
+                    </div>
+                    <div class="border-t border-gray-200 pt-4 mb-4">
+                        <div class="flex items-end justify-between mb-3">
+                            <div>
+                                <div class="text-sm text-gray-500">Harga mulai dari</div>
+                                <div class="text-3xl font-bold text-gray-900">Rp ***</div>
+                            </div>
+                            <div class="text-xs text-gray-500">/orang</div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/6282372404544?text=Halo,%20saya%20ingin%20booking%20Medan%20-%20Riau" 
+                       target="_blank"
+                       class="block w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-3 rounded-xl font-bold text-center hover:from-yellow-600 hover:to-yellow-700 transition">
+                        💬 Tanya Harga & Booking
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <!-- Why Choose Us -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-yellow-500 font-semibold text-sm">KEUNGGULAN KAMI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Mengapa Pilih KeREN Travel?</h2>
+                <p class="text-gray-600 text-lg">Kepuasan dan kenyamanan Anda adalah prioritas kami</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl">
+                        ✅
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Terpercaya</h3>
+                    <p class="text-gray-600">Berpengalaman melayani ribuan pelanggan dengan rating terbaik</p>
+                </div>
+
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl">
+                        💺
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Nyaman</h3>
+                    <p class="text-gray-600">Armada terbaru dengan fasilitas AC, musik, dan kursi yang nyaman</p>
+                </div>
+
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl">
+                        🔒
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Aman</h3>
+                    <p class="text-gray-600">Driver profesional dan berpengalaman dengan protokol keselamatan ketat</p>
+                </div>
+
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl">
+                        💰
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Harga Bersaing</h3>
+                    <p class="text-gray-600">Harga terjangkau dengan kualitas pelayanan terbaik</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-yellow-400 via-orange-400 to-orange-500 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Siap Untuk Perjalanan Anda?
+            </h2>
+            <p class="text-gray-800 text-lg mb-8">
+                Booking sekarang dan nikmati perjalanan yang nyaman, aman, dan terpercaya!
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20booking" 
+                   target="_blank"
+                   class="inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition transform hover:scale-105 shadow-xl">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Booking Sekarang
+                </a>
+                
+                <a href="./contact.html"
+                   class="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                    </svg>
+                    Hubungi Kami
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-xl">K</div>
+                        <span class="font-bold text-xl">KeREN Travel</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Solusi perjalanan terpercaya untuk kenyamanan dan keamanan Anda</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="./services.html" class="hover:text-yellow-400 transition">Travel Antar Kota</a></li>
+                        <li><a href="./services.html" class="hover:text-yellow-400 transition">Door to Door</a></li>
+                        <li><a href="./services.html" class="hover:text-yellow-400 transition">Pengiriman Paket</a></li>
+                        <li><a href="./services.html" class="hover:text-yellow-400 transition">Charter Mobil</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Informasi</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="./about.html" class="hover:text-yellow-400 transition">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">Rute & Harga</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📱 0823-7240-4544</li>
+                        <li>📧 info@kerentravel.com</li>
+                        <li>📍 Medan, Sumatera Utara</li>
+                        <li class="pt-2">
+                            <a href="https://wa.me/6282372404544" target="_blank" class="inline-block bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-green-600 transition">
+                                💬 Chat WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 KeREN Travel & Tour. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('show');
+        });
+
+        // Tab Switching
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+                
+                // Remove active class from all buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Hide all tab contents
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Show target tab content
+                document.getElementById(targetTab).classList.remove('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+
+ 

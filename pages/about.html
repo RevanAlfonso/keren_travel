@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - KeREN Travel & Tour</title>
+    <meta name="description" content="Mengenal lebih dekat KeREN Travel, perjalanan kami, visi misi, dan komitmen memberikan layanan terbaik untuk Anda">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-about {
+            background: linear-gradient(rgba(10, 26, 68, 0.85), rgba(10, 26, 68, 0.9)), 
+                        url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #F6D372, #D9A441);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(246, 211, 114, 0.2);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 20px);
+            background: linear-gradient(to bottom, #F6D372, transparent);
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        #mobile-menu.show {
+            max-height: 500px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #F6D372 0%, #D9A441 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .value-card {
+            transition: all 0.4s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(246, 211, 114, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #F6D372 0%, #D9A441 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20bertanya" 
+       target="_blank" 
+       class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-white text-xl">K</div>
+                    <span class="text-white font-bold text-xl">KeREN Travel</span>
+                </div>
+                <ul class="hidden md:flex space-x-8 text-white text-sm font-medium">
+                    <li><a href="../index.html" class="hover:text-yellow-400 transition">Beranda</a></li>
+                    <li><a href="./services.html" class="hover:text-yellow-400 transition">Layanan</a></li>
+                    <li><a href="./article.html" class="hover:text-yellow-400 transition">Rute & Harga</a></li>
+                    <li><a href="./contact.html" class="hover:text-yellow-400 transition">Kontak</a></li>
+                    <li><a href="#" class="hover:text-yellow-400 transition">Tentang Kami</a></li>
+                    <li><a href="./article.html" class="hover:text-yellow-400 transition">Artikel</a></li>
+                </ul>
+                <a href="https://wa.me/6282372404544" target="_blank" 
+                   class="hidden md:block bg-yellow-400 text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-yellow-500 transition">
+                    Pesan Sekarang
+                </a>
+                <button id="menu-toggle" class="md:hidden text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="md:hidden text-white pb-4">
+                <a href="../index.html" class="block py-2 hover:text-yellow-400">Beranda</a>
+                <a href="./services.html" class="block py-2 hover:text-yellow-400">Layanan</a>
+                <a href="./routeprice.html" class="block py-2 hover:text-yellow-400">Rute & Harga</a>
+                <a href="./contact.html" class="block py-2 hover:text-yellow-400">Kontak</a>
+                <a href="#" class="block py-2 hover:text-yellow-400">Tentang Kami</a>
+                <a href="./article.html" class="block py-2 hover:text-yellow-400">Artikel</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-about min-h-[60vh] flex items-center justify-center relative">
+        <div class="text-center text-white px-4 pt-20">
+            <div class="flex justify-center items-center gap-2 mb-6 text-gray-300">
+                <a href="../index.html" class="hover:text-yellow-400 transition">Home</a>
+                <span>›</span>
+                <span class="text-yellow-400">Tentang Kami</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-bold mb-4">Mengenal <span class="gradient-text">KeREN Travel</span></h1>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Mitra perjalanan terpercaya Anda sejak awal berdirinya</p>
+        </div>
+    </section>
+
+    <!-- Perkenalan Singkat -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1527246018007-4255a76e2d48?w=800" 
+                         alt="KeREN Travel Team" 
+                         class="rounded-2xl shadow-2xl w-full h-[500px] object-cover">
+                    <div class="absolute -bottom-6 -right-6 bg-gradient-to-br from-yellow-400 to-orange-500 p-8 rounded-2xl shadow-2xl text-center">
+                        <div class="stat-number">100%</div>
+                        <div class="text-sm font-semibold text-gray-900">Dedikasi Layanan</div>
+                    </div>
+                </div>
+                
+                
+                <div>
+                    <span class="text-yellow-500 font-semibold text-sm">TENTANG KAMI</span>
+                    <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-6">KeREN Travel & Tour</h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        KeREN Travel adalah perusahaan jasa transportasi dan travel yang berdedikasi untuk memberikan 
+                        layanan perjalanan terbaik di wilayah Sumatera. Dengan pengalaman lebih dari 5 tahun, kami telah 
+                        melayani ribuan pelanggan yang puas.
+                    </p>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">
+                        Nama "KeREN" sendiri mencerminkan komitmen kami untuk memberikan pengalaman perjalanan yang 
+                        <strong>Keren</strong> - nyaman, aman, dan berkesan bagi setiap pelanggan kami.
+                    </p>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 mt-8">
+                        <div class="text-center">
+                            <div class="stat-number">24/7</div>
+                            <p class="text-gray-600 text-sm font-medium">Layanan</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="stat-number">10+</div>
+                            <p class="text-gray-600 text-sm font-medium">Rute</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="stat-number">100%</div>
+                            <p class="text-gray-600 text-sm font-medium">Aman</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latar Belakang -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 font-semibold text-sm">PERJALANAN KAMI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Latar Belakang Berdirinya KeREN Travel</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+                    Berawal dari keinginan untuk menghadirkan layanan transportasi yang nyaman, aman, 
+                    dan mudah dijangkau di Sumatera.
+                </p>
+            </div>
+            
+            <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                <div class="space-y-8">
+    
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">2024 – Ide & Perencanaan</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            KeREN Travel bermula dari keresahan akan minimnya layanan transportasi yang benar-benar
+                            mengutamakan kenyamanan dan layanan yang ramah. Dari situ, kami mulai menyusun konsep
+                            layanan travel yang modern, jujur, dan terpercaya.
+                        </p>
+                    </div>
+    
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">2024 – Persiapan Armada & Sistem</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Kami mulai menyiapkan armada, memeriksa kelayakan kendaraan, menyeleksi driver,
+                            serta membangun sistem pemesanan yang mudah digunakan agar pelanggan bisa 
+                            menikmati pengalaman perjalanan tanpa ribet.
+                        </p>
+                    </div>
+    
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">2025 – Hari Peluncuran</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            KeREN Travel resmi beroperasi pada tahun 2025. Dengan penuh semangat, kami mulai melayani
+                            perjalanan antar kota dengan fokus pada kenyamanan, keamanan, dan pelayanan maksimal
+                            untuk setiap pelanggan.
+                        </p>
+                    </div>
+    
+                    <div class="timeline-item">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Visi Ke Depan</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Meski baru memulai, KeREN Travel berkomitmen untuk terus berkembang, menghadirkan 
+                            rute-rute baru, armada yang lebih modern, dan pelayanan yang semakin baik demi 
+                            menjadi pilihan utama perjalanan Anda di Sumatera.
+                        </p>
+                    </div>
+    
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Visi & Misi -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 font-semibold text-sm">ARAH KAMI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Visi & Misi</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Visi -->
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-10 rounded-3xl border-2 border-blue-200">
+                    <div class="w-20 h-20 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-4xl text-white">
+                        🎯
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 text-center mb-6">Visi Kami</h3>
+                    <p class="text-gray-700 text-lg leading-relaxed text-center">
+                        Menjadi perusahaan travel terdepan dan terpercaya di Sumatera yang mengutamakan kenyamanan, 
+                        keamanan, dan kepuasan pelanggan dalam setiap perjalanan.
+                    </p>
+                </div>
+                
+                <!-- Misi -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 p-10 rounded-3xl border-2 border-yellow-200">
+                    <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6 text-4xl text-white">
+                        🚀
+                    </div>
+                    <h3 class="text-3xl font-bold text-gray-900 text-center mb-6">Misi Kami</h3>
+                    <ul class="space-y-4 text-gray-700 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 text-xl mr-3 flex-shrink-0">✓</span>
+                            <span>Memberikan layanan transportasi berkualitas tinggi dengan harga terjangkau</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 text-xl mr-3 flex-shrink-0">✓</span>
+                            <span>Menjaga standar keamanan dan kenyamanan armada</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 text-xl mr-3 flex-shrink-0">✓</span>
+                            <span>Mengembangkan SDM yang profesional dan ramah</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-yellow-500 text-xl mr-3 flex-shrink-0">✓</span>
+                            <span>Terus berinovasi dalam pelayanan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Komitmen Pelayanan -->
+    <section class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-400 font-semibold text-sm">JANJI KAMI</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4">Komitmen Pelayanan</h2>
+                <p class="text-gray-300 text-lg max-w-3xl mx-auto">
+                    Kepuasan dan keamanan Anda adalah prioritas utama kami
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-white/20 hover:bg-white/20 transition">
+                    <div class="text-5xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold mb-3">Keamanan Terjamin</h3>
+                    <p class="text-gray-300 text-sm">
+                        Armada terawat, driver berpengalaman, dan standar keamanan tinggi
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-white/20 hover:bg-white/20 transition">
+                    <div class="text-5xl mb-4">⏰</div>
+                    <h3 class="text-xl font-bold mb-3">Tepat Waktu</h3>
+                    <p class="text-gray-300 text-sm">
+                        Kami menghargai waktu Anda dengan jadwal keberangkatan yang tepat
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-white/20 hover:bg-white/20 transition">
+                    <div class="text-5xl mb-4">💰</div>
+                    <h3 class="text-xl font-bold mb-3">Harga Transparan</h3>
+                    <p class="text-gray-300 text-sm">
+                        Tidak ada biaya tersembunyi, harga yang jelas dan terjangkau
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl text-center border border-white/20 hover:bg-white/20 transition">
+                    <div class="text-5xl mb-4">🎧</div>
+                    <h3 class="text-xl font-bold mb-3">CS 24/7</h3>
+                    <p class="text-gray-300 text-sm">
+                        Customer service siap membantu Anda kapan saja
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nilai Layanan -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-yellow-500 font-semibold text-sm">NILAI KAMI</span>
+                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Nilai-Nilai Layanan</h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto">
+                    Prinsip yang kami pegang dalam setiap pelayanan
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="value-card bg-gradient-to-br from-red-50 to-red-100 p-8 rounded-2xl border-2 border-red-200">
+                    <div class="w-16 h-16 bg-red-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        ❤️
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Integritas</h3>
+                    <p class="text-gray-600">
+                        Kami berkomitmen untuk jujur, transparan, dan bertanggung jawab dalam setiap tindakan kami
+                    </p>
+                </div>
+                
+                <div class="value-card bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border-2 border-blue-200">
+                    <div class="w-16 h-16 bg-blue-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        🤝
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Kepercayaan</h3>
+                    <p class="text-gray-600">
+                        Membangun hubungan jangka panjang dengan pelanggan melalui pelayanan yang konsisten
+                    </p>
+                </div>
+                
+                <div class="value-card bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl border-2 border-green-200">
+                    <div class="w-16 h-16 bg-green-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        ⭐
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Profesionalisme</h3>
+                    <p class="text-gray-600">
+                        Standar tinggi dalam setiap aspek layanan, dari driver hingga customer service
+                    </p>
+                </div>
+                
+                <div class="value-card bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl border-2 border-purple-200">
+                    <div class="w-16 h-16 bg-purple-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        💡
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Inovasi</h3>
+                    <p class="text-gray-600">
+                        Terus berkembang dan beradaptasi dengan kebutuhan pelanggan dan teknologi terkini
+                    </p>
+                </div>
+                
+                <div class="value-card bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl border-2 border-yellow-200">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        😊
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Customer First</h3>
+                    <p class="text-gray-600">
+                        Kepuasan pelanggan adalah ukuran kesuksesan kami. Kebutuhan Anda adalah prioritas
+                    </p>
+                </div>
+                
+                <div class="value-card bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-2xl border-2 border-orange-200">
+                    <div class="w-16 h-16 bg-orange-500 rounded-xl flex items-center justify-center mb-6 text-3xl text-white">
+                        🌱
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Berkelanjutan</h3>
+                    <p class="text-gray-600">
+                        Peduli lingkungan dengan armada yang efisien dan praktik bisnis yang bertanggung jawab
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-yellow-400 via-orange-400 to-orange-500 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Siap Memulai Perjalanan Bersama Kami?
+            </h2>
+            <p class="text-gray-800 text-lg mb-8">
+                Bergabunglah dengan ribuan pelanggan yang telah mempercayai KeREN Travel untuk perjalanan mereka
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+                <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20booking" 
+                   target="_blank"
+                   class="inline-flex items-center gap-3 bg-gray-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition transform hover:scale-105 shadow-xl">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                    Booking Sekarang
+                </a>
+                
+                <a href="services.html"
+                   class="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition transform hover:scale-105 shadow-xl">
+                    Lihat Layanan Kami
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+            
+            <!-- Trust Indicators -->
+            <div class="grid grid-cols-3 gap-6 max-w-2xl mx-auto mt-12">
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4">
+                    <div class="text-3xl font-bold text-gray-900">Baru</div>
+                    <div class="text-sm text-gray-800 font-medium">Diluncurkan</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4">
+                    <div class="text-3xl font-bold text-gray-900">Responsif</div>
+                    <div class="text-sm text-gray-800 font-medium">Layanan Cepat</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4">
+                    <div class="text-3xl font-bold text-gray-900">Profesional</div>
+                    <div class="text-sm text-gray-800 font-medium">Dikelola Ahli</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center font-bold text-xl">K</div>
+                        <span class="font-bold text-xl">KeREN Travel</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Solusi perjalanan terpercaya untuk kenyamanan dan keamanan Anda</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="services.html" class="hover:text-yellow-400 transition">Travel Antar Kota</a></li>
+                        <li><a href="services.html" class="hover:text-yellow-400 transition">Door to Door</a></li>
+                        <li><a href="services.html" class="hover:text-yellow-400 transition">Pengiriman Paket</a></li>
+                        <li><a href="services.html" class="hover:text-yellow-400 transition">Charter Mobil</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Informasi</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-yellow-400 transition">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">Rute & Harga</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">Syarat & Ketentuan</a></li>
+                        <li><a href="#" class="hover:text-yellow-400 transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>📱 0823-7240-4544</li>
+                        <li>📧 info@kerentravel.com</li>
+                        <li>📍 Medan, Sumatera Utara</li>
+                        <li class="pt-2">
+                            <a href="https://wa.me/6282372404544" target="_blank" class="inline-block bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-green-600 transition">
+                                💬 Chat WhatsApp
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 KeREN Travel & Tour. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
