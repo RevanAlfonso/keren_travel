@@ -86,7 +86,27 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+
+        nav {
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(10, 26, 68, 0.95) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
     </style>
+        <script>
+            window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('nav');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+        </script>
 </head>
 <body class="bg-gray-50">
     
