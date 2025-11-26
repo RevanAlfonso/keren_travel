@@ -96,6 +96,88 @@ nav.scrolled {
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
+#ai-chat-messages {
+        scrollbar-width: thin;
+        scrollbar-color: #cbd5e1 #f1f5f9;
+    }
+    #ai-chat-messages::-webkit-scrollbar {
+        width: 6px;
+    }
+    #ai-chat-messages::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+    #ai-chat-messages::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+    .ai-typing-indicator span {
+        animation: ai-blink 1.4s infinite;
+    }
+    .ai-typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+    .ai-typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+    @keyframes ai-blink {
+        0%, 60%, 100% { opacity: 0.3; }
+        30% { opacity: 1; }
+    }
+    .ai-quick-btn {
+        transition: all 0.2s;
+    }
+    .ai-quick-btn:hover {
+        transform: translateY(-2px);
+    }
+    /* Float Buttons - Mobile Optimization */
+@media (max-width: 640px) {
+    .fixed.bottom-4.right-4 {
+        bottom: 1rem;
+        right: 1rem;
+    }
+    
+    /* Ensure buttons don't overlap with mobile browser UI */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+        .fixed.bottom-4.right-4 {
+            bottom: calc(1rem + env(safe-area-inset-bottom));
+        }
+    }
+}
+
+/* Chat Window Mobile Fixes */
+#aiChatWindow {
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 640px) {
+    #aiChatWindow {
+        bottom: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Make close button more accessible on mobile */
+    #aiCloseChat {
+        padding: 0.75rem;
+    }
+}
+
+/* Prevent body scroll when chat is open on mobile */
+body.chat-open {
+    overflow: hidden;
+}
+
+@media (min-width: 641px) {
+    body.chat-open {
+        overflow: auto;
+    }
+}
     </style>
         <script>
             window.addEventListener('scroll', function() {
@@ -110,14 +192,128 @@ nav.scrolled {
 </head>
 <body class="bg-gray-50">
     
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20bertanya%20tentang%20layanan" 
-       target="_blank" 
-       class="whatsapp-float bg-green-500 text-white p-4 rounded-full shadow-2xl hover:bg-green-600 transition">
-        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-        </svg>
-    </a>
+    <div class="fixed bottom-4 right-4 z-50 flex flex-col-reverse gap-3 items-end">
+        <!-- Floating AI Chat Button -->
+        <button id="aiChatToggle" class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 rounded-full p-3 sm:p-4 shadow-2xl transition-all duration-300 transform hover:scale-110 relative">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">AI</span>
+        </button>
+    
+        <!-- WhatsApp Float Button -->
+        <a href="https://wa.me/6282372404544?text=Halo%20KeREN%20Travel,%20saya%20ingin%20bertanya%20tentang%20layanan%20travel" 
+           target="_blank" 
+           class="bg-green-500 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:bg-green-600 transition-all transform hover:scale-110">
+            <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            </svg>
+        </a>
+    </div>
+    
+    <!-- AI Chat Window -->
+    <div id="aiChatWindow" class="fixed bottom-4 right-4 w-[calc(100vw-2rem)] sm:w-96 h-[calc(100vh-2rem)] sm:h-[600px] max-h-[600px] bg-white rounded-2xl shadow-2xl hidden flex-col overflow-hidden border-2 border-yellow-400 z-50">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Asisten KeREN Travel</h3>
+                    <p class="text-xs text-gray-800 flex items-center">
+                        <span class="w-2 h-2 bg-green-500 rounded-full mr-1 animate-pulse"></span>
+                        Online - Smart Assistant
+                    </p>
+                </div>
+            </div>
+            <button id="aiCloseChat" class="hover:bg-yellow-600 rounded-lg p-2 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+    
+        <!-- Messages Container -->
+        <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-br from-gray-50 to-yellow-50">
+            <!-- Welcome Message -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-md max-w-[80%] border border-yellow-200">
+                    <p class="text-sm text-gray-800 font-medium">Halo! 👋 Saya asisten KeREN Travel.</p>
+                    <p class="text-sm text-gray-600 mt-2">Saya siap membantu Anda dengan:</p>
+                    <ul class="text-xs text-gray-600 mt-2 space-y-1 ml-4">
+                        <li>✈️ Info rute & harga travel</li>
+                        <li>🚐 Layanan door to door</li>
+                        <li>📍 Destinasi wisata Sumatera</li>
+                        <li>📦 Pengiriman paket</li>
+                    </ul>
+                    <p class="text-xs text-yellow-600 mt-3 font-semibold">Silakan pilih atau ketik pertanyaan! 😊</p>
+                </div>
+            </div>
+            
+            <!-- Quick Action Buttons -->
+            <div id="aiQuickButtons" class="flex flex-col gap-2 px-2">
+                <button class="ai-quick-btn bg-white hover:bg-yellow-50 border-2 border-yellow-200 rounded-xl p-3 text-left text-sm font-medium text-gray-700 shadow-sm">
+                    📍 Lihat Rute & Harga
+                </button>
+                <button class="ai-quick-btn bg-white hover:bg-yellow-50 border-2 border-yellow-200 rounded-xl p-3 text-left text-sm font-medium text-gray-700 shadow-sm">
+                    🚐 Layanan Door to Door
+                </button>
+                <button class="ai-quick-btn bg-white hover:bg-yellow-50 border-2 border-yellow-200 rounded-xl p-3 text-left text-sm font-medium text-gray-700 shadow-sm">
+                    📦 Kirim Paket
+                </button>
+                <button class="ai-quick-btn bg-white hover:bg-yellow-50 border-2 border-yellow-200 rounded-xl p-3 text-left text-sm font-medium text-gray-700 shadow-sm">
+                    💬 Cara Booking
+                </button>
+            </div>
+        </div>
+    
+        <!-- Input Area -->
+        <div class="border-t-2 border-yellow-200 p-4 bg-white">
+            <form id="aiChatForm" class="flex gap-2">
+                <input 
+                    type="text" 
+                    id="aiUserInput" 
+                    placeholder="Ketik pertanyaan Anda..."
+                    class="flex-1 border-2 border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent text-sm"
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit" 
+                    id="aiSendBtn"
+                    class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 rounded-xl px-5 py-3 transition-all transform hover:scale-105 flex items-center justify-center font-bold shadow-lg"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
+                </button>
+            </form>
+        
+        </div>
+    
+        <!-- Input Area -->
+    <div class="border-t-2 border-yellow-200 p-4 bg-white">
+        <!-- Tombol Minimize khusus mobile - letakkan SEBELUM form -->
+        <button id="aiMinimizeBtn" class="sm:hidden w-full mb-3 bg-gray-100 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-200 transition flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+            Tutup Chat
+        </button>
+        
+        <form id="aiChatForm" class="flex gap-2">
+            <!-- form content tetap sama -->
+        </form>
+        <p class="text-xs text-gray-500 mt-2 text-center">Atau hubungi langsung: <a href="https://wa.me/6282372404544" class="text-yellow-600 font-semibold hover:underline">WhatsApp</a></p>
+    </div>
+    </div>
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
@@ -424,6 +620,240 @@ nav.scrolled {
         </div>
     </section>
 
+
+<!-- Smart Price Calculator Section -->
+<section id="price-calculator" class="py-20 bg-gradient-to-br from-yellow-50 via-orange-50 to-yellow-100 relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-yellow-400 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <span class="inline-block bg-yellow-400 text-gray-900 px-4 py-2 rounded-full text-sm font-bold mb-4">
+                🎯 Kalkulasi Perjalanan
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Cek Harga <span class="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">Per Kursi</span>
+            </h2>
+            <p class="text-gray-700 text-lg max-w-2xl mx-auto">
+                Hitung estimasi biaya per kursi untuk perjalanan Anda. Bayar hanya untuk kursi yang dipesan!
+            </p>
+        </div>
+
+        <!-- Calculator Card -->
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border-4 border-yellow-400">
+            <div class="grid md:grid-cols-2 gap-0">
+                <!-- Left Side - Form -->
+                <div class="p-8 md:p-10 bg-white">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+                        <span class="w-8 h-8 bg-yellow-400 rounded-lg flex items-center justify-center mr-3 text-sm">1</span>
+                        Detail Perjalanan
+                    </h3>
+                    
+                    <form id="priceCalculatorForm" class="space-y-6">
+                        <!-- Rute -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                📍 Rute Perjalanan
+                            </label>
+                            <select id="routeSelect" required
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-400 focus:outline-none transition bg-gray-50">
+                                <option value="">-- Pilih Rute --</option>
+                                <optgroup label="🗺️ Sumatera Barat">
+                                    <option value="medan-padang" data-price="250000" data-duration="12-14">Medan → Padang</option>
+                                    <option value="medan-bukittinggi" data-price="220000" data-duration="10-12">Medan → Bukittinggi</option>
+                                    <option value="medan-payakumbuh" data-price="200000" data-duration="9-11">Medan → Payakumbuh</option>
+                                    <option value="medan-pasaman" data-price="180000" data-duration="8-10">Medan → Pasaman</option>
+                                    <option value="medan-padangsidempuan" data-price="160000" data-duration="7-9">Medan → Padang Sidempuan</option>
+                                </optgroup>
+                                <optgroup label="🌊 Riau">
+                                    <option value="medan-pekanbaru" data-price="190000" data-duration="7-9">Medan → Pekanbaru</option>
+                                    <option value="medan-riau-pesisir" data-price="150000" data-duration="6-8">Medan → Riau Pesisir</option>
+                                    <option value="medan-baganbatu" data-price="130000" data-duration="5-6">Medan → Bagan Batu</option>
+                                </optgroup>
+                            </select>
+                            <p class="text-xs text-gray-500 mt-2">💺 Harga per kursi - sharing dengan penumpang lain</p>
+                        </div>
+
+                        <!-- Jumlah Kursi -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                🪑 Jumlah Kursi yang Dipesan
+                            </label>
+                            <div class="flex items-center gap-3">
+                                <button type="button" id="decreasePassenger" 
+                                        class="w-12 h-12 bg-gray-200 hover:bg-gray-300 rounded-xl font-bold text-xl transition">
+                                    −
+                                </button>
+                                <input type="number" id="passengerCount" value="1" min="1" max="15" required readonly
+                                       class="flex-1 text-center text-2xl font-bold px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-400 focus:outline-none bg-gray-50">
+                                <button type="button" id="increasePassenger" 
+                                        class="w-12 h-12 bg-yellow-400 hover:bg-yellow-500 rounded-xl font-bold text-xl transition">
+                                    +
+                                </button>
+                            </div>
+                            <div class="mt-3 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+                                <p class="text-xs text-blue-800">
+                                    <strong>💡 Catatan:</strong> Anda membayar per kursi. Jika pesan 1 kursi, Anda akan sharing mobil dengan penumpang lain. 
+                                    Untuk mobil pribadi (charter), pesan semua kursi dalam 1 armada.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Tanggal -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                📅 Tanggal Keberangkatan
+                            </label>
+                            <input type="date" id="departureDate" required
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-yellow-400 focus:outline-none transition bg-gray-50">
+                            <p class="text-xs text-gray-500 mt-2">⚡ Weekend & hari libur mungkin ada penyesuaian harga</p>
+                        </div>
+
+                        <!-- Layanan Tambahan -->
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">
+                                ✨ Layanan Tambahan (Opsional)
+                            </label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="checkbox" id="doorToDoor" class="w-4 h-4 text-yellow-400 rounded">
+                                    <span class="ml-3 text-sm text-gray-700">Door to Door (+Rp 30.000/kursi)</span>
+                                </label>
+                                <label class="flex items-center p-3 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                                    <input type="checkbox" id="luggage" class="w-4 h-4 text-yellow-400 rounded">
+                                    <span class="ml-3 text-sm text-gray-700">Bagasi Extra (+Rp 20.000/kursi)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Calculate Button -->
+                        <button type="submit" 
+                                class="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-gray-900 py-4 rounded-xl font-bold text-lg hover:from-yellow-500 hover:to-orange-600 transition transform hover:scale-105 shadow-lg">
+                            💰 Hitung Estimasi Harga
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Side - Result -->
+                <div class="p-8 md:p-10 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
+                    <!-- Pattern Background -->
+                    <div class="absolute inset-0 opacity-5">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-yellow-400 rounded-full blur-3xl"></div>
+                    </div>
+                    
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <span class="w-8 h-8 bg-yellow-400 text-gray-900 rounded-lg flex items-center justify-center mr-3 text-sm">2</span>
+                            Estimasi Biaya
+                        </h3>
+
+                        <!-- Initial State -->
+                        <div id="initialState" class="text-center py-12">
+                            <div class="text-6xl mb-4">🧮</div>
+                            <p class="text-gray-400 text-lg">Isi form di samping untuk<br/>melihat estimasi harga</p>
+                        </div>
+
+                        <!-- Result State (Hidden by default) -->
+                        <div id="resultState" class="hidden">
+                            <!-- Route Info -->
+                            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 mb-6">
+                                <div class="text-sm text-gray-400 mb-1">Rute</div>
+                                <div id="resultRoute" class="font-bold text-xl text-yellow-400">-</div>
+                                <div class="flex items-center gap-4 mt-3 text-sm">
+                                    <div>
+                                        <span class="text-gray-400">Estimasi:</span>
+                                        <span id="resultDuration" class="font-semibold ml-1">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Price Breakdown -->
+                            <div class="space-y-3 mb-6">
+                                <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                    <span class="text-gray-400">Harga per Kursi</span>
+                                    <span id="pricePerSeat" class="font-semibold">-</span>
+                                </div>
+                                <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                    <span class="text-gray-400">Jumlah Kursi</span>
+                                    <span id="resultSeats" class="font-semibold">-</span>
+                                </div>
+                                <div id="additionalServices" class="hidden">
+                                    <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                        <span class="text-gray-400">Layanan Tambahan</span>
+                                        <span id="additionalPrice" class="font-semibold">-</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                    <span class="text-gray-400">Tanggal</span>
+                                    <span id="resultDate" class="font-semibold">-</span>
+                                </div>
+                            </div>
+
+                            <!-- Total Price -->
+                            <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-6 mb-6">
+                                <div class="text-gray-900 text-sm font-semibold mb-1">TOTAL ESTIMASI</div>
+                                <div id="totalPrice" class="text-4xl font-bold text-gray-900 mb-2">Rp -</div>
+                                <div id="seatInfo" class="text-sm text-gray-800 font-medium">-</div>
+                            </div>
+
+                            <!-- Important Note -->
+                            <div class="bg-orange-500/20 border-2 border-orange-400 rounded-xl p-4 mb-6">
+                                <div class="flex items-start">
+                                    <div class="text-2xl mr-3">⚠️</div>
+                                    <div>
+                                        <div class="font-bold text-orange-300 mb-1">Penting!</div>
+                                        <div class="text-xs text-gray-300 leading-relaxed">
+                                            Harga ini adalah <strong>estimasi</strong>. Harga aktual dapat berbeda tergantung:
+                                            kondisi jalan, BBM, hari libur, dan kebijakan perusahaan. 
+                                            <strong>Konfirmasi harga pasti dengan admin kami.</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Booking Button -->
+                            <button id="bookNowBtn" 
+                                    class="w-full bg-green-500 hover:bg-green-600 text-white py-4 rounded-xl font-bold text-lg transition transform hover:scale-105 shadow-lg flex items-center justify-center gap-2">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                                </svg>
+                                Tanya Harga Pasti via WA
+                            </button>
+
+                            <p class="text-xs text-gray-400 text-center mt-4">
+                                Klik tombol di atas untuk konfirmasi harga dengan admin
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="grid md:grid-cols-3 gap-6 mt-12">
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-yellow-200">
+                <div class="text-3xl mb-3">💺</div>
+                <h4 class="font-bold text-gray-900 mb-2">Bayar Per Kursi</h4>
+                <p class="text-sm text-gray-600">Pesan sesuai kebutuhan. 1 kursi atau lebih, fleksibel!</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-yellow-200">
+                <div class="text-3xl mb-3">🤝</div>
+                <h4 class="font-bold text-gray-900 mb-2">Sharing atau Privat</h4>
+                <p class="text-sm text-gray-600">Sharing dengan penumpang lain, atau charter satu mobil penuh</p>
+            </div>
+            <div class="bg-white rounded-xl p-6 shadow-lg border-2 border-yellow-200">
+                <div class="text-3xl mb-3">💬</div>
+                <h4 class="font-bold text-gray-900 mb-2">Konfirmasi Harga</h4>
+                <p class="text-sm text-gray-600">Hubungi admin untuk harga pasti sesuai kondisi terkini</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Charter Mobil - Coming Soon -->
 <section class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden">
     <!-- Background Pattern -->
@@ -562,5 +992,521 @@ nav.scrolled {
             menu.classList.toggle('show');
         });
     </script>
+
+    <!-- Price Calculator Script -->
+<script>
+    (function() {
+        // DOM elements
+        const form = document.getElementById('priceCalculatorForm');
+        const routeSelect = document.getElementById('routeSelect');
+        const passengerInput = document.getElementById('passengerCount');
+        const decreaseBtn = document.getElementById('decreasePassenger');
+        const increaseBtn = document.getElementById('increasePassenger');
+        const dateInput = document.getElementById('departureDate');
+        const doorToDoorCheck = document.getElementById('doorToDoor');
+        const luggageCheck = document.getElementById('luggage');
+        const initialState = document.getElementById('initialState');
+        const resultState = document.getElementById('resultState');
+        const bookNowBtn = document.getElementById('bookNowBtn');
+    
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+        dateInput.value = today;
+    
+        // Passenger/Seat counter
+        decreaseBtn.addEventListener('click', () => {
+            const current = parseInt(passengerInput.value);
+            if (current > 1) {
+                passengerInput.value = current - 1;
+            }
+        });
+    
+        increaseBtn.addEventListener('click', () => {
+            const current = parseInt(passengerInput.value);
+            if (current < 15) {
+                passengerInput.value = current + 1;
+            }
+        });
+    
+        // Form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            calculatePrice();
+        });
+    
+        // Main calculation function
+        function calculatePrice() {
+            // Get form values
+            const route = routeSelect.value;
+            const routeOption = routeSelect.options[routeSelect.selectedIndex];
+            const pricePerSeat = parseInt(routeOption.dataset.price);
+            const duration = routeOption.dataset.duration;
+            const seats = parseInt(passengerInput.value);
+            const date = dateInput.value;
+    
+            // Validation
+            if (!route) {
+                alert('⚠️ Mohon pilih rute perjalanan!');
+                return;
+            }
+    
+            // Calculate base price
+            let totalPrice = pricePerSeat * seats;
+            let additionalCost = 0;
+            let additionalServices = [];
+    
+            // Add door to door
+            if (doorToDoorCheck.checked) {
+                const doorCost = 30000 * seats;
+                additionalCost += doorCost;
+                additionalServices.push('Door to Door');
+            }
+    
+            // Add extra luggage
+            if (luggageCheck.checked) {
+                const luggageCost = 20000 * seats;
+                additionalCost += luggageCost;
+                additionalServices.push('Bagasi Extra');
+            }
+    
+            totalPrice += additionalCost;
+    
+            // Update UI
+            displayResults({
+                route: routeOption.text,
+                duration: `${duration} jam`,
+                seats,
+                pricePerSeat,
+                additionalCost,
+                additionalServices,
+                date: formatDate(date),
+                totalPrice,
+                routeValue: route
+            });
+        }
+    
+        // Display results
+        function displayResults(data) {
+            // Hide initial state, show results
+            initialState.classList.add('hidden');
+            resultState.classList.remove('hidden');
+    
+            // Update all fields
+            document.getElementById('resultRoute').textContent = data.route;
+            document.getElementById('resultDuration').textContent = data.duration;
+            document.getElementById('pricePerSeat').textContent = formatCurrency(data.pricePerSeat);
+            document.getElementById('resultSeats').textContent = `${data.seats} kursi`;
+            document.getElementById('resultDate').textContent = data.date;
+            document.getElementById('totalPrice').textContent = formatCurrency(data.totalPrice);
+            document.getElementById('seatInfo').textContent = `${data.seats} kursi × ${formatCurrency(data.pricePerSeat)}`;
+    
+            // Additional services
+            const additionalDiv = document.getElementById('additionalServices');
+            if (data.additionalCost > 0) {
+                additionalDiv.classList.remove('hidden');
+                document.getElementById('additionalPrice').textContent = formatCurrency(data.additionalCost);
+            } else {
+                additionalDiv.classList.add('hidden');
+            }
+    
+            // Update WhatsApp booking link
+            const message = generateWhatsAppMessage(data);
+            bookNowBtn.onclick = () => {
+                window.open(`https://wa.me/6282372404544?text=${encodeURIComponent(message)}`, '_blank');
+            };
+    
+            // Scroll to result
+            resultState.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    
+        // Generate WhatsApp message
+        function generateWhatsAppMessage(data) {
+            let message = `Halo KeREN Travel! 🚐
+    
+    Saya ingin booking berdasarkan kalkulasi:
+    
+    📍 *DETAIL PERJALANAN*
+    Rute: ${data.route}
+    Tanggal: ${data.date}
+    Jumlah Kursi: ${data.seats} kursi`;
+    
+            if (data.additionalServices.length > 0) {
+                message += `\nLayanan Tambahan: ${data.additionalServices.join(', ')}`;
+            }
+    
+            message += `
+    
+    💰 *ESTIMASI BIAYA*
+    Harga per Kursi: ${formatCurrency(data.pricePerSeat)}`;
+    
+            if (data.additionalCost > 0) {
+                message += `\nLayanan Tambahan: ${formatCurrency(data.additionalCost)}`;
+            }
+    
+            message += `\nTotal Estimasi: ${formatCurrency(data.totalPrice)}
+    
+    Mohon konfirmasi harga pasti untuk rute dan tanggal ini. Terima kasih! 🙏`;
+    
+            return message;
+        }
+    
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+    
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('id-ID', options);
+        }
+    })();
+
+    (function() {
+    // Knowledge Base - Database jawaban chatbot
+    const knowledgeBase = {
+        // Greeting
+        greeting: {
+            patterns: ['hai', 'halo', 'hi', 'hello', 'hei', 'hey', 'pagi', 'siang', 'sore', 'malam', 'selamat'],
+            responses: [
+                "Halo! 👋 Selamat datang di KeREN Travel! Ada yang bisa saya bantu hari ini?",
+                "Hai! 😊 Senang bisa membantu Anda. Mau tanya tentang travel atau booking?",
+                "Halo! Saya asisten KeREN Travel siap membantu perjalanan Anda! 🚐"
+            ]
+        },
+        
+        // Rute & Harga
+        rute: {
+            patterns: ['rute', 'tujuan', 'kemana', 'ke mana', 'jurusan', 'jalur', 'trayek', 'pergi', 'berangkat'],
+            responses: [
+                "Kami melayani berbagai rute di Sumatera:\n\n🗺️ SUMATERA BARAT:\n• Medan → Padang\n• Medan → Bukittinggi\n• Medan → Payakumbuh\n• Medan → Pasaman\n\n🌊 RIAU:\n• Medan → Pekanbaru\n• Medan → Riau pesisir\n\nAda rute khusus yang Anda cari? Atau mau booking sekarang?"
+            ]
+        },
+        
+        harga: {
+            patterns: ['harga', 'biaya', 'tarif', 'ongkos', 'berapa', 'price', 'murah', 'mahal', 'budget'],
+            responses: [
+                "Untuk harga terbaru dan akurat, bisa langsung hubungi kami ya! 💰\n\nHarga bervariasi tergantung:\n✓ Rute tujuan\n✓ Jenis layanan (reguler/door to door)\n✓ Jumlah penumpang\n✓ Waktu keberangkatan\n\n📱 Chat WA: 0823-7240-4544\n\nAtau mau saya arahkan ke form booking?"
+            ]
+        },
+        
+        // Layanan
+        doorToDoor: {
+            patterns: ['door to door', 'antar jemput', 'jemput', 'antar', 'alamat', 'rumah'],
+            responses: [
+                "Layanan Door to Door KeREN Travel:\n\n🏠 KEUNTUNGAN:\n✓ Dijemput dari rumah/lokasi Anda\n✓ Diantar sampai alamat tujuan\n✓ Tanpa transit, langsung!\n✓ Fleksibel waktu\n✓ Lebih nyaman & privat\n\n💼 Cocok untuk:\n• Perjalanan keluarga\n• Bawa barang banyak\n• Perjalanan bisnis\n\nMau booking? Chat langsung: 0823-7240-4544"
+            ]
+        },
+        
+        paket: {
+            patterns: ['paket', 'kirim', 'kiriman', 'pengiriman', 'barang', 'dokumen', 'cargo'],
+            responses: [
+                "Layanan Pengiriman Paket KeREN Travel:\n\n📦 LAYANAN:\n✓ Kirim paket antar kota\n✓ Dokumen penting\n✓ Barang titipan\n✓ Cepat & aman!\n\n⚡ KEUNGGULAN:\n• Harga kompetitif\n• Tracking jelas\n• Terpercaya\n• Door to door\n\nInfo lengkap & booking:\n📱 WA: 0823-7240-4544"
+            ]
+        },
+        
+        // Booking
+        booking: {
+            patterns: ['booking', 'pesan', 'reservasi', 'order', 'book', 'beli tiket', 'daftar'],
+            responses: [
+                "Cara Booking di KeREN Travel MUDAH! 🎫\n\n📝 PILIHAN 1 - Form Online:\nScroll ke bawah → isi form booking\n\n💬 PILIHAN 2 - WhatsApp:\nLangsung chat: 0823-7240-4544\n\n📋 INFO YANG PERLU DISIAPKAN:\n• Nama lengkap\n• No. WhatsApp\n• Lokasi jemput\n• Tujuan\n• Tanggal keberangkatan\n• Jumlah penumpang\n\nMau booking sekarang?"
+            ]
+        },
+        
+        waktu: {
+            patterns: ['jam', 'waktu', 'kapan', 'berapa lama', 'durasi', 'jadwal', 'berangkat'],
+            responses: [
+                "Informasi Waktu Perjalanan:\n\n⏰ ESTIMASI PERJALANAN:\n• Medan → Padang: 12-14 jam\n• Medan → Bukittinggi: 10-12 jam\n• Medan → Pekanbaru: 7-9 jam\n• Medan → Riau pesisir: 5-7 jam\n\n🕐 JADWAL KEBERANGKATAN:\nFleksibel! Sesuai permintaan Anda\n\n📱 Tanya jadwal detail:\n0823-7240-4544"
+            ]
+        },
+        
+        // Armada
+        mobil: {
+            patterns: ['mobil', 'kendaraan', 'armada', 'unit', 'innova', 'hiace', 'avanza', 'bus'],
+            responses: [
+                "Armada KeREN Travel:\n\n🚐 JENIS KENDARAAN:\n✓ Toyota Innova Reborn (terbaru)\n✓ Toyota Hiace Premium\n✓ Avanza/Xenia\n✓ Semua terawat & bersih!\n\n⭐ FASILITAS:\n• AC dingin\n• Kursi empuk\n• Audio entertainment\n• Bersih & wangi\n• Driver profesional\n\nMau lihat unit? Chat WA!"
+            ]
+        },
+        
+        // Keamanan
+        aman: {
+            patterns: ['aman', 'keamanan', 'safety', 'bahaya', 'selamat', 'asuransi'],
+            responses: [
+                "Keamanan di KeREN Travel:\n\n🔒 JAMINAN KEAMANAN:\n✓ Driver berpengalaman & terlatih\n✓ Kendaraan rutin service\n✓ Asuransi perjalanan\n✓ SOP keselamatan ketat\n✓ 24/7 monitoring\n\n✅ SERTIFIKAT:\n• Driver punya SIM & KIR lengkap\n• Kendaraan lolos uji kelayakan\n\nPerjalanan Anda prioritas kami!"
+            ]
+        },
+        
+        // Destinasi Wisata
+        wisata: {
+            patterns: ['wisata', 'tempat', 'destinasi', 'liburan', 'jalan-jalan', 'tour', 'tourism'],
+            responses: [
+                "Destinasi Wisata Populer di Sumatera:\n\n🏞️ SUMATERA BARAT:\n• Jam Gadang Bukittinggi\n• Ngarai Sianok\n• Pantai Padang\n• Danau Maninjau\n• Istana Pagaruyung\n\n🌴 RIAU:\n• Pulau Rupat\n• Masjid Agung An-Nur\n• Taman Rekreasi Alam Mayang\n\n🏔️ SUMUT:\n• Danau Toba\n• Istana Maimun\n\nMau tour ke sana? Kita bisa atur!"
+            ]
+        },
+        
+        // Promo
+        promo: {
+            patterns: ['promo', 'diskon', 'potongan', 'cashback', 'voucher', 'kupon'],
+            responses: [
+                "Info Promo KeREN Travel:\n\n🎁 PROMO TERBARU:\nUntuk promo spesial dan harga terbaik, langsung chat aja ya!\n\n💰 DAPATKAN:\n• Harga khusus rombongan\n• Diskon pelanggan setia\n• Promo hari tertentu\n\n📱 Tanya promo hari ini:\nWA: 0823-7240-4544\n\nJangan sampai kehabisan! 🔥"
+            ]
+        },
+        
+        // Kontak
+        kontak: {
+            patterns: ['kontak', 'hubungi', 'telpon', 'telepon', 'whatsapp', 'wa', 'call', 'cs'],
+            responses: [
+                "Hubungi KeREN Travel:\n\n📱 WHATSAPP:\n0823-7240-4544\n(Fast response!)\n\n📧 EMAIL:\ninfo@kerentravel.com\n\n🌐 WEBSITE:\nkerentravel.netlify.app\n\n📍 KANTOR:\nMedan, Sumatera Utara\n\n⏰ LAYANAN:\n24/7 siap melayani!\n\nChat sekarang?"
+            ]
+        },
+        
+        // Thanks
+        thanks: {
+            patterns: ['terima kasih', 'thanks', 'makasih', 'tengkyu', 'thx'],
+            responses: [
+                "Sama-sama! 😊 Senang bisa membantu. Ada lagi yang mau ditanyakan?",
+                "Terima kasih kembali! 🙏 Jangan ragu tanya-tanya lagi ya!",
+                "You're welcome! ✨ Siap membantu kapan saja!"
+            ]
+        }
+    };
+
+    // State management
+    let aiIsProcessing = false;
+
+    // DOM elements
+    const aiChatToggle = document.getElementById('aiChatToggle');
+    const aiChatWindow = document.getElementById('aiChatWindow');
+    const aiCloseChat = document.getElementById('aiCloseChat');
+    const aiChatForm = document.getElementById('aiChatForm');
+    const aiUserInput = document.getElementById('aiUserInput');
+    const aiChatMessages = document.getElementById('ai-chat-messages');
+    const aiSendBtn = document.getElementById('aiSendBtn');
+    const aiQuickButtons = document.getElementById('aiQuickButtons');
+
+// Toggle chat window
+aiChatToggle.addEventListener('click', () => {
+    aiChatWindow.classList.toggle('hidden');
+    aiChatWindow.classList.toggle('flex');
+    
+    // Lock body scroll on mobile when chat is open
+    if (!aiChatWindow.classList.contains('hidden')) {
+        document.body.classList.add('chat-open');
+        aiUserInput.focus();
+    } else {
+        document.body.classList.remove('chat-open');
+    }
+});
+
+aiCloseChat.addEventListener('click', () => {
+    aiChatWindow.classList.add('hidden');
+    aiChatWindow.classList.remove('flex');
+    document.body.classList.remove('chat-open');
+});
+
+    // Quick buttons handler
+    aiQuickButtons.addEventListener('click', (e) => {
+        if (e.target.classList.contains('ai-quick-btn')) {
+            const btnText = e.target.textContent.trim();
+            let query = '';
+            
+            if (btnText.includes('Rute')) query = 'rute';
+            else if (btnText.includes('Door to Door')) query = 'door to door';
+            else if (btnText.includes('Paket')) query = 'kirim paket';
+            else if (btnText.includes('Booking')) query = 'cara booking';
+            
+            if (query) {
+                aiUserInput.value = query;
+                aiChatForm.dispatchEvent(new Event('submit'));
+            }
+        }
+    });
+
+    // Add message to chat
+    function aiAddMessage(content, isUser = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `flex gap-3 ${isUser ? 'justify-end' : ''}`;
+        
+        if (isUser) {
+            messageDiv.innerHTML = `
+                <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 rounded-2xl rounded-tr-none p-4 shadow-md max-w-[80%]">
+                    <p class="text-sm font-medium">${aiEscapeHtml(content)}</p>
+                </div>
+                <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-md max-w-[80%] border border-yellow-200">
+                    <p class="text-sm text-gray-800 whitespace-pre-line">${aiEscapeHtml(content)}</p>
+                </div>
+            `;
+        }
+        
+        aiChatMessages.appendChild(messageDiv);
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    // Add typing indicator
+    function aiAddTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'ai-typing-indicator';
+        typingDiv.className = 'flex gap-3';
+        typingDiv.innerHTML = `
+            <div class="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+            </div>
+            <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-md border border-yellow-200">
+                <div class="ai-typing-indicator flex gap-1">
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                </div>
+            </div>
+        `;
+        aiChatMessages.appendChild(typingDiv);
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    function aiRemoveTypingIndicator() {
+        const indicator = document.getElementById('ai-typing-indicator');
+        if (indicator) indicator.remove();
+    }
+
+    // Escape HTML to prevent XSS
+    function aiEscapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Smart pattern matching
+    function aiGetResponse(userMessage) {
+        const message = userMessage.toLowerCase().trim();
+        
+        // Check each category in knowledge base
+        for (const [category, data] of Object.entries(knowledgeBase)) {
+            for (const pattern of data.patterns) {
+                if (message.includes(pattern)) {
+                    // Return random response from array
+                    const responses = data.responses;
+                    return responses[Math.floor(Math.random() * responses.length)];
+                }
+            }
+        }
+        
+        // Default response if no match
+        return "Maaf, saya kurang paham pertanyaan Anda. 😅\n\nCoba tanyakan tentang:\n• Rute & harga\n• Layanan door to door\n• Cara booking\n• Kirim paket\n\nAtau langsung chat CS kami:\n📱 WA: 0823-7240-4544";
+    }
+
+    // Handle form submission
+    aiChatForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const message = aiUserInput.value.trim();
+        if (!message || aiIsProcessing) return;
+
+        aiIsProcessing = true;
+        aiSendBtn.disabled = true;
+        
+        // Add user message
+        aiAddMessage(message, true);
+        aiUserInput.value = '';
+        
+        // Show typing indicator
+        aiAddTypingIndicator();
+        
+        // Simulate thinking delay
+        await new Promise(resolve => setTimeout(resolve, 800));
+        
+        // Get smart response
+        const response = aiGetResponse(message);
+        
+        // Remove typing indicator and show response
+        aiRemoveTypingIndicator();
+        aiAddMessage(response, false);
+        
+        aiIsProcessing = false;
+        aiSendBtn.disabled = false;
+        aiUserInput.focus();
+    });
+
+    
+
+    // Enter key handler
+    aiUserInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            aiChatForm.dispatchEvent(new Event('submit'));
+        }
+    });
+})();
+
+// Tambahkan setelah definisi aiCloseChat
+const aiMinimizeBtn = document.getElementById('aiMinimizeBtn');
+
+// Handler untuk tombol minimize (mobile)
+if (aiMinimizeBtn) {
+    aiMinimizeBtn.addEventListener('click', () => {
+        aiChatWindow.classList.add('hidden');
+        aiChatWindow.classList.remove('flex');
+        document.body.classList.remove('chat-open');
+    });
+}
+
+// Update handler close yang sudah ada dengan haptic feedback
+aiCloseChat.addEventListener('click', () => {
+    // Haptic feedback untuk mobile (jika support)
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+    
+    aiChatWindow.classList.add('hidden');
+    aiChatWindow.classList.remove('flex');
+    document.body.classList.remove('chat-open');
+});
+
+// Tambahkan di dalam IIFE chatbot script
+let touchStartY = 0;
+let touchEndY = 0;
+
+aiChatWindow.addEventListener('touchstart', (e) => {
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+aiChatWindow.addEventListener('touchend', (e) => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    // Swipe down untuk close (hanya di mobile)
+    if (window.innerWidth <= 640) {
+        const swipeDistance = touchEndY - touchStartY;
+        if (swipeDistance > 100) { // Swipe down > 100px
+            aiChatWindow.classList.add('hidden');
+            aiChatWindow.classList.remove('flex');
+            document.body.classList.remove('chat-open');
+        }
+    }
+}
+    </script>
+    
 </body>
 </html>

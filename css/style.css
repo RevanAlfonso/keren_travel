@@ -139,13 +139,13 @@ overflow: hidden;
 }
 
 /* WhatsApp Float Button */
-.whatsapp-float {
+/* .whatsapp-float {
     position: fixed;
     bottom: 30px;
     right: 30px;
     z-index: 100;
     animation: float 3s ease-in-out infinite;
-}
+} */
 
 /* Loading Animation */
 .loading {
